@@ -25,7 +25,7 @@ Of course, this is not an exhaustive list, and there will be many other mandator
 
 <h2>Pre-reqs</h2>
 <p>Power Apps Premium license</p>
-<p>Open AI API Access Key</p>
+<p>Open AI API Access Key. Can be obtained from https://platform.openai.com/</p>
 
 <h2>Components of JustAskIt</h2>
 
