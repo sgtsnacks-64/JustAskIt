@@ -1,11 +1,21 @@
 <h1>What is JustAskIt?</h1>
 As the name suggests, JustAskIt, allows you to configure a prompt with context, purpose and a rule set and then submit a request alongside the prompt and get a response back. 
 It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response. The name came from Mike and myself talking about how best to format a response from a
-Large Language Model, and Mike said Just Ask It by adding a rule to the rule set.  
+Large Language Model (LLM), and Mike said Just Ask It by adding a rule to the rule set.  
 
 It was created by [Jon Russell](https://www.linkedin.com/in/jon-russell-20975726/) and [Mike Gowland](https://www.linkedin.com/in/mikegowland/)
 
 Our context was to start at what we know so that the information received can be checked by our specific tech domain knowledge. As an example we went from 1.5 days lead time to 1 hour, to think of a client specific domain Dataverse example.
+
+<h2>Guidance and Rules</h2>
+
+When creating a rule set for a prompt, detials of how to do this are below, you should always provide these three mandatory rules:
+
+1. You must always be truthful
+2. You must always be honest
+3. You must always be helpful
+
+Of course, this is not an exhaustive list, and there will be many other mandatory rules that you may wish to add. For example, rules around equality, diversity and inclusion, the removal of uncocious bias and gender stereotyping.  These are just three rules that should form the baseline for any prompt that is submitted to a LLM.
 
 <h2>Examples</h2>
 <p>Dataverse Schema Prompt</p>
