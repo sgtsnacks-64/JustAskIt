@@ -10,8 +10,8 @@ Our context was to start at what we know so that the information received can be
 Dataverse Schema Prompt, Hackathon prompt, Power Platform Helper prompt. And many more...  
 
 <h2>Pre-reqs</h2>
-*Power Apps Premium license
-*Open AI API Access Key
+<p>Power Apps Premium license</p>
+<p>Open AI API Access Key</p>
 
 <h2>Components of JustAskIt</h2>
 
