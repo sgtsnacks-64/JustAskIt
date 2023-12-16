@@ -1,7 +1,6 @@
 <h1>What is JustAskIt?</h1>
-As the name suggests, JustAskIt, allows you to configure a prompt with context, purpose and a rule set and then submit a request alongside the prompt and get a response back. 
-It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response. The name came from Mike and myself talking about how best to format a response from a
-Large Language Model (LLM), and Mike said Just Ask It by adding a rule to the rule set.  
+As the name suggests, JustAskIt, allows you to configure a prompt with context, purpose and a rule set and then submit a request to an Open AI large language model (LLM) alongside the prompt and get a response back. 
+It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response. The name came from Mike and myself talking about how best to format a response from a LLM, and Mike said Just Ask It by adding a rule to the rule set.  
 
 <p></p>
 
