@@ -3,7 +3,11 @@ As the name suggests, JustAskIt, allows you to configure a prompt with context, 
 It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response. The name came from Mike and myself talking about how best to format a response from a
 Large Language Model (LLM), and Mike said Just Ask It by adding a rule to the rule set.  
 
+<p></p>
+
 It was created by [Jon Russell](https://www.linkedin.com/in/jon-russell-20975726/) and [Mike Gowland](https://www.linkedin.com/in/mikegowland/)
+
+<p></p>
 
 Our context was to start at what we know so that the information received can be checked by our specific tech domain knowledge. As an example we went from 1.5 days lead time to 1 hour, to think of a client specific domain Dataverse example.
 
@@ -63,3 +67,7 @@ Of course, this is not an exhaustive list, and there will be many other mandator
 [An Epic AI Solution](https://youtu.be/rA6QpHAQaDE)  
 [Mike and Jon in conversation with Mark Smith](https://www.comingsoon.com)  
 [Mike on the On Air In the Cloud podcast with Keith Atherton, Matt Boyd and Gregor Suttie](https://podcasters.spotify.com/pod/show/onairinthecloud/episodes/Episode-Ten---Mike-Gowland-e2d6tbu)
+[X - Jon Russell](https://twitter.com/jondoesflow)
+[Power Snacks Blog - Mike Gowland](https://blog.powersnacks.org/)
+[Jon Does Flow blog](https://www.jondoesflow.com/)
+
