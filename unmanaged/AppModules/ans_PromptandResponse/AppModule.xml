@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>ans_PromptandResponse</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="ans_feedback" />
+    <AppModuleComponent type="1" schemaName="ans_prompt" />
+    <AppModuleComponent type="1" schemaName="ans_promptrule" />
+    <AppModuleComponent type="1" schemaName="ans_request" />
+    <AppModuleComponent type="1" schemaName="ans_response" />
+    <AppModuleComponent type="1" schemaName="ans_rule" />
+    <AppModuleComponent type="26" id="{fa48ed09-4f7e-ee11-8179-0022480040a1}" />
+    <AppModuleComponent type="26" id="{606f9b3a-4f7e-ee11-8179-002248004ea0}" />
+    <AppModuleComponent type="26" id="{9f317918-61b2-45c6-94b4-012abaa21ad6}" />
+    <AppModuleComponent type="26" id="{1079573a-4c5f-48fa-8a91-149468c205be}" />
+    <AppModuleComponent type="26" id="{4d7582bd-982f-4f4c-870d-1faa00aea22d}" />
+    <AppModuleComponent type="26" id="{50ec4ce2-53d0-4008-b597-45bcbc499233}" />
+    <AppModuleComponent type="26" id="{71190015-619c-4795-adbb-68a9aa243abf}" />
+    <AppModuleComponent type="26" id="{63fef0d9-7486-43c3-948d-92f06e8e8bc1}" />
+    <AppModuleComponent type="26" id="{df8b7b37-bb4e-4155-9780-a33941c2143a}" />
+    <AppModuleComponent type="26" id="{c18e63dc-fb87-4b69-8193-b2112229d213}" />
+    <AppModuleComponent type="26" id="{2a9a1af8-add2-4ec5-81fe-f36b55c8259e}" />
+    <AppModuleComponent type="26" id="{f78a2938-9cb2-4253-b7bc-fe2ac2faa013}" />
+    <AppModuleComponent type="62" schemaName="ans_PromptandResponse" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="JustAskIt" languagecode="1033" />
+  </LocalizedNames>
+  <appelements>
+    <appelement uniquename="ans_ans_PromptandResponse_canvasappid_ans_promptandresponsedefaultcommandlibrary_acf5f">
+      <canvasappid>
+        <name>ans_promptandresponsedefaultcommandlibrary_acf5f</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>ans_ans_PromptandResponse_canvasappid_ans_promptandresponsedefaultcommandlibrary_acf5f</name>
+    </appelement>
+  </appelements>
+</AppModule>

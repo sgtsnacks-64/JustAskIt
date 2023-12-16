@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{36a01853-245f-4917-bb21-fdb42543e6e1}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{4b669179-7b56-40ea-aece-d6bfd3af4add}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="null_section_4" id="9f659a5c-e540-42b8-b7c5-dabf51823f58" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Disclaimer" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell rowspan="2" id="{a17b1b6e-dc43-4c60-8615-5fa8085bd474}" showlabel="false" colspan="1">
+                        <labels>
+                          <label description="Disclaimer" languagecode="1033" />
+                        </labels>
+                        <control id="WebResource_new_1" classid="{9FDF5F91-88B1-47F4-AD53-C11EFC01A01D}">
+                          <parameters>
+                            <Url>ans_disclaimer</Url>
+                            <PassParameters>false</PassParameters>
+                            <Security>false</Security>
+                            <Scrolling>auto</Scrolling>
+                            <Border>false</Border>
+                            <ShowOnMobileClient>false</ShowOnMobileClient>
+                            <WebResourceId>{67f15ad4-8a7c-ee11-8179-002248004ea0}</WebResourceId>
+                          </parameters>
+                        </control>
+                        <events>
+                          <event name="onload" application="false" active="false" />
+                        </events>
+                      </cell>
+                    </row>
+                    <row />
+                  </rows>
+                </section>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{84391224-d675-4322-b6c0-9e6aa7953f45}" locklevel="1">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{f57f51ca-dacd-4e89-b348-dd18f7f49465}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9403374d-ed93-4fbb-94b1-f62a1048aa33}" locklevel="1" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request" languagecode="1033" />
+                        </labels>
+                        <control id="ans_request" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ans_request" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{31e0dac1-f4a4-49a1-9d0d-e85327f55e82}" locklevel="1" colspan="1" rowspan="1" visible="true">
+                        <labels>
+                          <label description="Total Tokens" languagecode="1033" />
+                        </labels>
+                        <control id="ans_totaltokens" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="ans_totaltokens" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c6288da0-c4c5-4269-80ed-6a3ef57992e1}" locklevel="1" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Token Cost" languagecode="1033" />
+                        </labels>
+                        <control id="ans_tokencost" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="ans_tokencost" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cff6f1b5-8f3e-4fd6-bd80-43314e80de5b}" locklevel="1" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Response Text" languagecode="1033" />
+                        </labels>
+                        <control id="ans_responsetext" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="ans_responsetext" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{72cc22b6-c954-42cd-84fc-5667b586d003}" locklevel="1" colspan="1" rowspan="8" visible="false">
+                        <labels>
+                          <label description="Memaid JS code" languagecode="1033" />
+                        </labels>
+                        <control id="ans_memaidjscode" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="ans_memaidjscode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="Section_ChartDisplay" id="0720bdb1-2e93-4288-8e18-ee8d14eba3d7" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Chart" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell rowspan="40" id="{af051129-ac5d-400c-a421-0aa9404bca92}" showlabel="false" colspan="1" auto="true">
+                        <labels>
+                          <label description="ChartDisplay" languagecode="1033" />
+                        </labels>
+                        <control id="WebResource_Mermaid" classid="{9FDF5F91-88B1-47F4-AD53-C11EFC01A01D}">
+                          <parameters>
+                            <Url>ans_chartdisplay</Url>
+                            <PassParameters>false</PassParameters>
+                            <Security>false</Security>
+                            <Scrolling>auto</Scrolling>
+                            <Border>true</Border>
+                            <ShowOnMobileClient>false</ShowOnMobileClient>
+                            <WebResourceId>{69679e3e-5a7b-ee11-8179-0022480040a1}</WebResourceId>
+                          </parameters>
+                        </control>
+                        <events>
+                          <event name="onload" application="false" active="false">
+                            <dependencies>
+                              <dependency id="ans_memaidjscode" />
+                            </dependencies>
+                          </event>
+                        </events>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_2" id="ec1eb73d-8101-48b5-9ab6-2a41bb89ca75" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+          <labels>
+            <label description="Feedback" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="null_section_3" id="fb406fdb-850b-4805-a49c-d1c26c9b7d4e" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Feedback" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{17c75742-3531-4d55-97a9-47c16c45cf30}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1699108165238" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>ans_feedback</TargetEntityType>
+                            <ViewId>{C098B0A4-F0D5-4BED-8C22-A8F65245862F}</ViewId>
+                            <ViewIds>{C098B0A4-F0D5-4BED-8C22-A8F65245862F}</ViewIds>
+                            <RelationshipName>ans_ans_feedback_Response_ans_response</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+          <events>
+            <event name="tabstatechange" application="false" active="false">
+              <Handlers>
+                <Handler functionName="FormLibrary.Library.onLoad" libraryName="crbe6_response_form_script" handlerUniqueId="{339fb3ac-ea18-4b52-8647-a2e86748a70d}" enabled="true" parameters="&quot;WebResource_Mermaid&quot;,&quot;ans_memaidjscode&quot;" passExecutionContext="true" />
+              </Handlers>
+            </event>
+          </events>
+        </tab>
+      </tabs>
+      <header id="{c46350eb-bcb1-49cf-a86b-33ffc8d1090d}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{9d17f231-c0bf-439a-bb63-cfca965a01b5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{20ef93d1-0327-4ca1-891b-7c8e317dac2d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{17fbccf1-f052-4a00-8923-99839354fa2c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{97345098-a901-4bf9-82d7-c32a8e260739}" colspan="1" rowspan="1" locklevel="1">
+              <labels>
+                <label description="Response Ref" languagecode="1033" />
+              </labels>
+              <control id="header_ans_responseref" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ans_responseref" disabled="true" />
+            </cell>
+            <cell id="{69a54024-f16f-43e4-bb9e-4baa4afa13f7}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Prompt" languagecode="1033" />
+              </labels>
+              <control id="header_ans_prompt" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ans_prompt" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{c86536d8-1046-4f25-80c5-78e2e40c8bd1}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{ba37def3-148b-4dc6-b64f-cb5c3d3f7c9e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f02de982-3972-4b21-bd99-a999eab08d0c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{8e6ce983-11a8-436b-a282-d0a108aea66b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="crbe6_response_form_script" libraryUniqueId="{b1a32aa5-94fc-4aed-a3da-30af7b920102}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="FormLibrary.Library.onLoad" libraryName="crbe6_response_form_script" handlerUniqueId="{75f78805-4a01-4bc4-a0e3-02a40121cd4a}" enabled="true" parameters="&quot;WebResource_Mermaid&quot;,&quot;ans_memaidjscode&quot;" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

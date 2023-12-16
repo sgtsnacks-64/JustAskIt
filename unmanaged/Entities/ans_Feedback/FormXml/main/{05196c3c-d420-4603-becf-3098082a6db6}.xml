@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{05196c3c-d420-4603-becf-3098082a6db6}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{fbecc0ec-6fc4-40de-9c40-d244513ed960}" IsUserDefined="1">
+          <labels>
+            <label description="Feedback" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{dc6f5c74-c58d-433c-a0ee-fe308f6b2198}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8954c1f6-5789-453e-a976-7be64ab24ed2}" showlabel="true" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{874f1a44-f983-4bac-8f6b-abbf561b98d7}" locklevel="0" colspan="1" rowspan="8">
+                        <labels>
+                          <label description="Feedback Description" languagecode="1033" />
+                        </labels>
+                        <control id="ans_feedbackdescription" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="ans_feedbackdescription" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{5d64d159-6bc3-431c-966e-018b05e5955d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Feedback Rating" languagecode="1033" />
+                        </labels>
+                        <control id="ans_feedbackrating" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="ans_feedbackrating" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_3" id="310c0a24-b315-4d5a-9ecf-616e16ff5737" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{37be2a85-3ec0-4faf-a9a7-a740b5d443f2}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{269879d7-ab6d-46b7-b700-b9ca9ad085ac}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1ff5a40f-e2f8-4757-bbe8-0457488e6a3b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f302ae4f-d2d0-472f-bce2-9d96088fe238}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e945d849-232f-4902-93d7-e0aa48737b19}" colspan="1" rowspan="1" locklevel="1">
+              <labels>
+                <label description="Feedback Ref" languagecode="1033" />
+              </labels>
+              <control id="header_ans_feedbackref" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ans_feedbackref" disabled="true" />
+            </cell>
+            <cell id="{c79303bb-d2c5-4139-a263-af157ba5adce}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Response" languagecode="1033" />
+              </labels>
+              <control id="header_ans_response" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ans_response" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{50d733bc-0f47-4562-973c-75389a3f1865}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{6ab187bf-af25-42b6-a97d-e4a3af44f61d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{5a7c95e8-6086-441c-9841-4f4cf31ea7fd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4e532f01-e92d-4f65-af33-10686057f512}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
