@@ -1,17 +1,13 @@
 <h1>What is JustAskIt?</h1>
 As the name suggests, JustAskIt, allows you to configure a prompt with context, purpose and a rule set and then submit a request alongside the prompt and get a response back. 
-It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response.  
+It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response.   
 
 It was created by [Jon Russell](https://www.linkedin.com/in/jon-russell-20975726/) and [Mike Gowland](https://www.linkedin.com/in/mikegowland/)
 
 Our context was to start at what we know so that the information received can be checked by our specific tech domain knowledge. As an example we went from 1.5 days lead time to 1 hour, to think of a client specific domain Dataverse example.
 
 <h2>Examples</h2>
-Dataverse Schema Prompt
-Hackathon prompt
-Power Platform Helper prompt
-
-And many more...
+Dataverse Schema Prompt, Hackathon prompt, Power Platform Helper prompt. And many more...  
 
 <h2>Pre-reqs</h2>
 *Power Apps Premium license
