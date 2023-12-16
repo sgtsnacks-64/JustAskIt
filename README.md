@@ -1,13 +1,17 @@
 <h1>What is JustAskIt?</h1>
 As the name suggests, JustAskIt, allows you to configure a prompt with context, purpose and a rule set and then submit a request alongside the prompt and get a response back. 
-It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response.   
+It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Power Automate cloud flow to process the prompt and response. The name came from Mike and myself talking about how best to format a response from a
+Large Language Model, and Mike said Just Ask It by adding a rule to the rule set.  
 
 It was created by [Jon Russell](https://www.linkedin.com/in/jon-russell-20975726/) and [Mike Gowland](https://www.linkedin.com/in/mikegowland/)
 
 Our context was to start at what we know so that the information received can be checked by our specific tech domain knowledge. As an example we went from 1.5 days lead time to 1 hour, to think of a client specific domain Dataverse example.
 
 <h2>Examples</h2>
-Dataverse Schema Prompt, Hackathon prompt, Power Platform Helper prompt. And many more...  
+<p>Dataverse Schema Prompt</p>
+<p>Hackathon prompt</p>
+<p>Power Platform Helper prompt</p>
+<p>And many more...  </p>
 
 <h2>Pre-reqs</h2>
 <p>Power Apps Premium license</p>
@@ -43,3 +47,9 @@ Dataverse Schema Prompt, Hackathon prompt, Power Platform Helper prompt. And man
 9. Add your request and choose the prompt you just created
 10. Submit prompt
 11. Prompt and Response cloud flow will execute and a response will be provided back to the Request in the Response subgrid.
+
+<h2>Links</h2>
+
+[An Epic AI Solution](https://youtu.be/rA6QpHAQaDE)  
+[Mike and Jon in conversation with Mark Smith](https://www.comingsoon.com)  
+[Mike on the On Air In the Cloud podcast with Keith Atherton, Matt Boyd and Gregor Suttie](https://podcasters.spotify.com/pod/show/onairinthecloud/episodes/Episode-Ten---Mike-Gowland-e2d6tbu)
