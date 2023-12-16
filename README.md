@@ -4,7 +4,12 @@ It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Po
 
 <p></p>
 
-It was created by **Jon Russell** [LinkedIn](https://www.linkedin.com/in/jon-russell-20975726/) and **Mike Gowland** [LinkedIn](https://www.linkedin.com/in/mikegowland/) [GitHub](https://github.com/sgtsnacks-64)
+It was created by:
+<img src="[image_url](https://github.com/sgtsnacks-64/JustAskIt/assets/96265020/5c461773-4fd7-4809-aae0-8eb665aeb504)" width="100" height="100">
+**Jon Russell** [LinkedIn](https://www.linkedin.com/in/jon-russell-20975726/)  
+
+<img src="[image_url](https://github.com/sgtsnacks-64/JustAskIt/assets/96265020/b75b1701-cb59-4d37-89fd-d4e8ee26c4ce)" width="100" height="100">
+**Mike Gowland** [LinkedIn](https://www.linkedin.com/in/mikegowland/) [GitHub](https://github.com/sgtsnacks-64)
 
 <p></p>
 
