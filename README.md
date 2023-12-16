@@ -4,7 +4,7 @@ It is a Power Apps Model-Driven App with Dataverse backend for storage, and a Po
 
 <p></p>
 
-It was created by [Jon Russell](https://www.linkedin.com/in/jon-russell-20975726/) and [Mike Gowland](https://www.linkedin.com/in/mikegowland/)
+It was created by **Jon Russell** [LinkedIn](https://www.linkedin.com/in/jon-russell-20975726/) and **Mike Gowland** [LinkedIn](https://www.linkedin.com/in/mikegowland/) [GitHub](https://github.com/sgtsnacks-64)
 
 <p></p>
 
