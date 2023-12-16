@@ -13,7 +13,7 @@ Our context was to start at what we know so that the information received can be
 
 <h2>Guidance and Rules</h2>
 
-When creating a rule set for a prompt, detials of how to do this are below, you should always provide these three mandatory rules:
+When creating a rule set for a prompt, details of how to do this are below, you should always provide these three mandatory rules:
 
 1. You must always be truthful
 2. You must always be honest
