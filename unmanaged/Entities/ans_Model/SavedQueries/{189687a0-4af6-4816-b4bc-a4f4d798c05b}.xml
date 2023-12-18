@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{189687a0-4af6-4816-b4bc-a4f4d798c05b}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ans_modelname" select="1" icon="1" preview="1">
+        <row name="result" id="ans_modelid">
+          <cell name="ans_modelname" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ans_model">
+          <attribute name="ans_modelid" />
+          <attribute name="ans_modelname" />
+          <attribute name="createdon" />
+          <order attribute="ans_modelname" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Models" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

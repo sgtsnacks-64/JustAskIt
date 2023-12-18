@@ -1,0 +1,49 @@
+if (typeof (FormLibrary) == "undefined") {
+    FormLibrary = {};
+  };
+  var isLoaded = false;
+  // Create Namespace container for functions in this library;
+  FormLibrary.Library = {
+    
+    onLoad: function(executionContext, htmlWebResource, chartAttribute){
+      // Get the form context
+      var formContext = executionContext.getFormContext();
+
+      // Get the web resource control
+      
+        var chartSpecified = formContext.getAttribute(chartAttribute).getValue() !== null;
+        var webResource = formContext.getControl(htmlWebResource);
+
+        if(webResource !== null && chartSpecified && !isLoaded){
+          // Get the data from the form
+          var data = {
+            graphDefinition: formContext.getAttribute(chartAttribute).getValue().replace(/(\r\n|\n|\r)/gm, ""),
+            theme: "default"
+            };
+    
+            // Send the data to the web resource
+            webResource.getContentWindow().then(function(contentWindow) {
+            contentWindow.postMessage(data, "*");
+            isLoaded = true;
+            });
+        }
+
+        this.toggleSection(executionContext, "Section_ChartDisplay", chartSpecified);
+        
+
+    },
+
+    toggleSection: function (executionContext, sectionName, isVisible) {
+      var formContext = executionContext.getFormContext(); // get form context
+      var tabs = formContext.ui.tabs.getAll(); // get all tabs
+  
+      for(var i = 0; i < tabs.length; i++) {
+          var tab = tabs[i];
+          var section = tab.sections.get(sectionName); // get the section
+          if(section) {
+              section.setVisible(isVisible); // set visibility
+              break;
+          }
+      }}
+
+  }
