@@ -6,7 +6,7 @@
       <LocalizedName description="JustAskIt" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.4</Version>
+    <Version>1.0.0.5</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>JustAskIt</UniqueName>
@@ -90,7 +90,6 @@
       <RootComponent type="1" schemaName="ans_rule" behavior="0" />
       <RootComponent type="1" schemaName="ans_upload" behavior="0" />
       <RootComponent type="29" id="{61df065d-207b-ee11-8179-002248004ea0}" behavior="0" />
-      <RootComponent type="29" id="{6f59635b-a680-ee11-8179-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{e57de9d1-cf7b-ee11-8179-0022480040a1}" behavior="0" />
       <RootComponent type="300" schemaName="ans_promptandresponsedefaultcommandlibrary_acf5f" behavior="0" />
       <RootComponent type="372" id="{22be469a-b40e-4e25-87c2-5b9a78caa96a}" schemaName="ans_azure-20open-20ai-20chat-2dgpt-20model" behavior="0" />
