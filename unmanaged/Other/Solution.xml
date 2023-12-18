@@ -6,18 +6,18 @@
       <LocalizedName description="JustAskIt" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.4</Version>
     <Managed>0</Managed>
     <Publisher>
-      <UniqueName>ANS</UniqueName>
+      <UniqueName>JustAskIt</UniqueName>
       <LocalizedNames>
-        <LocalizedName description="ans" languagecode="1033" />
+        <LocalizedName description="JustAskIt" languagecode="1033" />
       </LocalizedNames>
       <Descriptions />
       <EMailAddress xsi:nil="true"></EMailAddress>
       <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
-      <CustomizationPrefix>ans</CustomizationPrefix>
-      <CustomizationOptionValuePrefix>74966</CustomizationOptionValuePrefix>
+      <CustomizationPrefix>jai</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>83202</CustomizationOptionValuePrefix>
       <Addresses>
         <Address>
           <AddressNumber>1</AddressNumber>
@@ -92,7 +92,6 @@
       <RootComponent type="29" id="{61df065d-207b-ee11-8179-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{6f59635b-a680-ee11-8179-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{e57de9d1-cf7b-ee11-8179-0022480040a1}" behavior="0" />
-      <RootComponent type="300" schemaName="ans_newrequest_91694" behavior="0" />
       <RootComponent type="300" schemaName="ans_promptandresponsedefaultcommandlibrary_acf5f" behavior="0" />
       <RootComponent type="372" id="{22be469a-b40e-4e25-87c2-5b9a78caa96a}" schemaName="ans_azure-20open-20ai-20chat-2dgpt-20model" behavior="0" />
       <RootComponent type="61" schemaName="ans_chartdisplay" behavior="0" />
@@ -109,24 +108,12 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="300" schemaName="ans_anscomponentlibraryheadersfooters_83614" displayName="ANS Component Library - Headers &amp; Footers" solution="Active" />
-        <Dependent type="300" schemaName="ans_newrequest_91694" displayName="New Request" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="300" schemaName="cr0a0_ansformscomponentlibrary_41d2f" displayName="ANS - Forms Component Library" solution="Active" />
-        <Dependent type="300" schemaName="ans_newrequest_91694" displayName="New Request" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="ans_PromptandResponse" displayName="JustAskIt" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2311.3024)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Prompt" id="{cf325c6b-8f58-48a0-9598-2159ae39a33f}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedopenaigpt4ip_d02bc" solution="Active" id.connectionreferencelogicalname="new_sharedopenaigpt4ip_d02bc" />
-        <Dependent type="29" displayName="Prompt and Response" id="{61df065d-207b-ee11-8179-002248004ea0}" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

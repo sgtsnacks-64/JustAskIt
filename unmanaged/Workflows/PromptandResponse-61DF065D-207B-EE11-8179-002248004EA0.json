@@ -10,10 +10,10 @@
           "name": "shared_commondataserviceforapps"
         }
       },
-      "shared_openaigpt4ip": {
+      "shared_openaigpt4ip_1": {
         "runtimeSource": "embedded",
         "connection": {
-          "connectionReferenceLogicalName": "new_sharedopenaigpt4ip_d02bc"
+          "connectionReferenceLogicalName": "ans_sharedopenaigpt4ip_3d2b6"
         },
         "api": {
           "name": "shared_openaigpt4ip"
@@ -230,7 +230,7 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "connectionName": "shared_openaigpt4ip",
+                  "connectionName": "shared_openaigpt4ip_1",
                   "operationId": "ChatPost",
                   "apiId": "/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip"
                 },
@@ -450,7 +450,7 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "connectionName": "shared_openaigpt4ip",
+                  "connectionName": "shared_openaigpt4ip_1",
                   "operationId": "ChatPost",
                   "apiId": "/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip"
                 },
