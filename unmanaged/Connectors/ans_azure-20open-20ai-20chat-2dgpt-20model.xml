@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Connector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <connectorid>22be469a-b40e-4e25-87c2-5b9a78caa96a</connectorid>
+  <description></description>
+  <displayname>Azure Open AI Chat-GPT Model</displayname>
+  <iconbrandcolor>#007ee5</iconbrandcolor>
+  <name>ans_azure-20open-20ai-20chat-2dgpt-20model</name>
+  <connectortype>1</connectortype>
+  <openapidefinition>/Connector/ans_azure-20open-20ai-20chat-2dgpt-20model_openapidefinition.json</openapidefinition>
+  <connectionparameters>/Connector/ans_azure-20open-20ai-20chat-2dgpt-20model_connectionparameters.json</connectionparameters>
+  <policytemplateinstances>/Connector/ans_azure-20open-20ai-20chat-2dgpt-20model_policytemplateinstances.json</policytemplateinstances>
+  <iconblob>/Connector/ans_azure-20open-20ai-20chat-2dgpt-20model_iconblob.Png</iconblob>
+</Connector>

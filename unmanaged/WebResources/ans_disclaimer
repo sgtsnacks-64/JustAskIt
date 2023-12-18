@@ -1,0 +1,22 @@
+<html>
+<head>
+    <style>
+        #diagramDiv {
+        display: flex;
+        
+        justify-content: center;
+        align-items: center;
+        }
+
+        svg#diagramDiv {
+        max-width: 50%;
+        }
+        
+        </style>
+</head>
+<body>
+    <div style="font-family: Arial;"><b>Please note that this is for informational purposes only.  Creation of the Dataverse schema and ERD is done by Open AI Azure Services and should be checked for errors.
+        <br><br>
+        The responses should be honest, helpful and harmless.</b></div>
+</body>
+</html>
