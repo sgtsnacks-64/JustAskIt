@@ -70,7 +70,6 @@ Of course, this is not an exhaustive list, and there will be many other mandator
 <h2>Links</h2>
 
 [An Epic AI Solution](https://youtu.be/rA6QpHAQaDE)  
-[Mike and Jon in conversation with Mark Smith]
 [Mike Gowland on the On Air In the Cloud podcast with Keith Atherton, Matt Boyd and Gregor Suttie](https://podcasters.spotify.com/pod/show/onairinthecloud/episodes/Episode-Ten---Mike-Gowland-e2d6tbu)  
 [X - Jon Russell](https://twitter.com/jondoesflow)  
 Blogs
