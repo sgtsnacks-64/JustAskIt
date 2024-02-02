@@ -1,0 +1,50 @@
+if (typeof (FormLibrary) == "undefined") {
+  FormLibrary = {};
+};
+var isLoaded = false;
+// Create Namespace container for functions in this library;
+FormLibrary.Library = {
+  
+  onLoad: function(executionContext, htmlWebResource){
+    // Get the form context
+    var formContext = executionContext.getFormContext();
+
+    // Get the web resource control
+      var webResource = formContext.getControl(htmlWebResource);
+
+      if(webResource !== null && !isLoaded){
+        // Get the data from the form
+  
+          var arrOutput = [];
+          var arrCostOutput = [];
+          Xrm.WebApi.retrieveMultipleRecords("ans_request", `?$select=ans_requestid&$expand=ans_ans_response_Request_ans_request($orderby=createdon asc;$select=ans_responsetext,ans_tokencost,jai_friendlyname)&$filter=ans_requestid eq ${formContext.data.entity.getId()}`).then(
+            function success(results) {
+              console.log(results);
+              var requestCost = results.entities[0].ans_ans_response_Request_ans_request.reduce((a, currentValue) => a + currentValue.ans_tokencost, 0);
+              formContext.getAttribute("jai_requestcost").setValue(requestCost);
+              for (var i = 0; i < results.entities.length; i++) {
+                var result = results.entities[i];
+                for (var j = 0; j < result.ans_ans_response_Request_ans_request.length; j++) {
+                  arrOutput.push({response: result.ans_ans_response_Request_ans_request[j]["ans_responsetext"], name: result.ans_ans_response_Request_ans_request[j]["jai_friendlyname"]}); // Append new string object to the array
+                  arrCostOutput.push(result.ans_ans_response_Request_ans_request[j]["ans_tokencost"]);
+                }
+              }
+              results.entities
+            },
+            function(error) {
+              console.log(error.message);
+            }
+          
+          );
+
+
+          // Send the data to the web resource
+          webResource.getContentWindow().then(function(contentWindow) {
+            contentWindow.postMessage(arrOutput, "*");
+          isLoaded = true;
+          });
+          
+      }
+  }
+
+}

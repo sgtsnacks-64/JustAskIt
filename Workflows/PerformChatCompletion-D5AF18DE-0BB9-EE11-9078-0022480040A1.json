@@ -1,0 +1,324 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "jai_sharedcommondataserviceforapps_ab4d0"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_openaigpt4ip": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedopenaigpt4ip_d02bc"
+        },
+        "api": {
+          "name": "shared_openaigpt4ip"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "485b9888-d9ab-4777-b0b0-0ed2b3189730"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "model",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "system",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "user",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_3": {
+                  "title": "conversation summary",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_4": {
+                  "title": "temperature",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Enter as float (0.0 - 1.0)",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_5": {
+                  "title": "presance_penalty",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Enter as float (0.0 - 1.0)",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_6": {
+                  "title": "frequency_penalty",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Enter as float (0.0 - 1.0)",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2",
+                "text_4"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Scope": {
+          "actions": {
+            "Get_Model_Record": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "cb9a6fb6-341b-4871-82a8-2634261fd410"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ans_models",
+                  "$select": "ans_modelname, ans_inputtokencost, ans_outputtokencost, jai_tokenlimit",
+                  "$filter": "ans_modelname eq '@{triggerBody()['text']}'",
+                  "$top": 1
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            },
+            "Get_Chat_Completion": {
+              "runAfter": {
+                "Get_Model_Record": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "d69607cf-f258-4668-8475-966e042f3c67"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_openaigpt4ip",
+                  "operationId": "ChatPost",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip"
+                },
+                "parameters": {
+                  "body/model": "@first(outputs('Get_Model_Record')?['body/value'])?['ans_modelname']",
+                  "body/messages": [
+                    {
+                      "role": "system",
+                      "content": "@triggerBody()['text_1']"
+                    },
+                    {
+                      "role": "user",
+                      "content": "@triggerBody()?['text_3']"
+                    },
+                    {
+                      "role": "user",
+                      "content": "@triggerBody()['text_2']"
+                    }
+                  ],
+                  "body/temperature": "@float(triggerBody()['text_4'])"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            },
+            "Input_Token_Cost": {
+              "runAfter": {
+                "Get_Chat_Completion": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "d26af2a9-6c9a-4d5f-aed5-6d359b63f00e"
+              },
+              "type": "Compose",
+              "inputs": "@mul(div(first(outputs('Get_Model_Record')?['body/value'])?['ans_inputtokencost'],1000),outputs('Get_Chat_Completion')?['body/usage/prompt_tokens'])"
+            },
+            "Output_Token_Cost": {
+              "runAfter": {
+                "Input_Token_Cost": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "3eaf5670-235f-42cb-b3b0-e978d6e4fc00"
+              },
+              "type": "Compose",
+              "inputs": "@mul(div(first(outputs('Get_Model_Record')?['body/value'])?['ans_outputtokencost'],1000),outputs('Get_Chat_Completion')?['body/usage/completion_tokens'])"
+            },
+            "Generate_output": {
+              "runAfter": {
+                "Output_Token_Cost": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "0b829aac-7fb2-419a-addd-7885e14bba06"
+              },
+              "type": "Compose",
+              "inputs": {
+                "response": "@{outputs('Get_Chat_Completion')?['body/first_content']}",
+                "prompt_tokens_total": "@outputs('Get_Chat_Completion')?['body/usage/total_tokens']",
+                "input_tokens": "@outputs('Get_Chat_Completion')?['body/usage/prompt_tokens']",
+                "output_tokens": "@outputs('Get_Chat_Completion')?['body/usage/prompt_tokens']",
+                "input_token_cost": "@outputs('Input_Token_Cost')",
+                "output_token_cost": "@outputs('Output_Token_Cost')",
+                "message": ""
+              }
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f59c8a9-a55a-4a14-ba7d-083c1ec140d9"
+          },
+          "type": "Scope"
+        },
+        "Successful_Response": {
+          "runAfter": {
+            "Scope": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "64e20fc8-826c-4f4d-bd22-ed49266c573e"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('Generate_output')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "response": {
+                  "type": "string"
+                },
+                "prompt_tokens_total": {
+                  "type": "integer"
+                },
+                "input_tokens": {
+                  "type": "integer"
+                },
+                "output_tokens": {
+                  "type": "integer"
+                },
+                "input_token_cost": {
+                  "type": "number"
+                },
+                "output_token_cost": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "Scope": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8a2eddb3-a77f-49ed-91f1-5369868e8d1f"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 500,
+            "body": {
+              "response": "",
+              "prompt_tokens_total": 0,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "input_token_cost": 0,
+              "output_token_cost": 0,
+              "message": "Failed to generate response"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "response": {
+                  "type": "string"
+                },
+                "prompt_tokens_total": {
+                  "type": "integer"
+                },
+                "input_tokens": {
+                  "type": "integer"
+                },
+                "output_tokens": {
+                  "type": "integer"
+                },
+                "input_token_cost": {
+                  "type": "number"
+                },
+                "output_token_cost": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

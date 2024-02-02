@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Request Guide</h1>
+
+    <p>This guide will explain how to generate a new request:</p>
+
+    <h2>Prompt</h2><br>
+
+    First, you'll need to choose a pre-defined prompt to use in the Prompt field. These prompts have been engineered to perform a specific task, such as generating an ERD for a business use case, or generating documentation for a Power Automate flow.<br>
+
+    You'll also need to set the temperature, you should choose a temperature that's between 0 (being deterministic) and 1 (being random). The higher the temperature, the more creative the output will be. Be aware that high temperatures can cause hallucinations.<br>
+
+    <h2>Request Details</h2><br>
+
+    Next, you'll need to provide some details about your request. This will help the AI to generate a more accurate response. Enter this in the "Request Text" field.<br>
+
+    <h2>Send Request</h2><br>
+
+    Finally, click "Submit Request" to send your request to the AI. The AI will then generate a response, which will be displayed in the "Response Text" field. Note responses can take a moment to complete.<br>
+
+
+
+</body>
+</html>

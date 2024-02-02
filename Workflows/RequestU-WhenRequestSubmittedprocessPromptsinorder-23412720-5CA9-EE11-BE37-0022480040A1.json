@@ -1,0 +1,770 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "jai_sharedcommondataserviceforapps_ab4d0"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_powerappsnotificationv2": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "jai_sharedpowerappsnotificationv2_6208e"
+        },
+        "api": {
+          "name": "shared_powerappsnotificationv2"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_new_request_is_triggered": {
+          "metadata": {
+            "operationMetadataId": "219e3ae9-4dd7-4a11-b6ee-927f92acae32"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 4,
+              "subscriptionRequest/entityname": "ans_request",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "ans_sendrequest"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "conditions": [
+            {
+              "expression": "@equals(triggerOutputs()?['body/ans_sendrequest'], true)"
+            }
+          ]
+        }
+      },
+      "actions": {
+        "Initialize_output_array": {
+          "runAfter": {
+            "List_Child_Prompts": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e2e18c12-a2e2-4daf-8b5c-46988342f754"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "arrOutput",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('List_Child_Prompts')?['body/value']",
+          "actions": {
+            "Condense_Conversation": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "d736b43a-fc18-4c5b-92ec-b7913cd410e6"
+              },
+              "type": "Select",
+              "inputs": {
+                "from": "@variables('arrOutput')",
+                "select": {
+                  "content": "@{item()?['role']} @{item()?['content']}"
+                }
+              }
+            },
+            "Check_payload_hasnt_exceeded_threshold": {
+              "actions": {
+                "Get_Prompt_Summary": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "f2a047dc-0f4c-43a6-bc01-7e716af4b9b8"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "d5af18de-0bb9-ee11-9078-0022480040a1"
+                    },
+                    "body": {
+                      "text": "gpt-4-0314",
+                      "text_1": "You will summarise a conversation that's ongoing with a user. You will provide the content of the message and you will provide a detailed but brief description of the summary of the conversation.\n\nYou must include key pieces of information such as the business type, the business problem being solved.\n\nIt is imperative that any Markdown diagrams are retained in your response.",
+                      "text_2": "perform the action as per the system prompt",
+                      "text_4": "0.1",
+                      "text_3": "@join(body('Condense_Conversation'),' ')",
+                      "text_6": "0.2"
+                    }
+                  }
+                },
+                "Print_summary": {
+                  "runAfter": {
+                    "Print_Summary_as_Array": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "94817753-9141-431f-95ea-86d435d883ef"
+                  },
+                  "type": "Compose",
+                  "inputs": [
+                    {
+                      "content": "@{body('Get_Prompt_Summary')?['response']}",
+                      "role": "system"
+                    }
+                  ]
+                },
+                "Print_Summary_as_Array": {
+                  "runAfter": {
+                    "Increment_Cost_1": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "9aa671b2-6552-4041-a43d-4f4d02ef0610"
+                  },
+                  "type": "ParseJson",
+                  "inputs": {
+                    "content": [
+                      {
+                        "content": "@{body('Get_Prompt_Summary')?['response']}"
+                      }
+                    ],
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "content": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "content"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "Increment_Cost_1": {
+                  "runAfter": {
+                    "Get_Prompt_Summary": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c35fcd88-89a9-45e5-96a8-18eab1c64ec5"
+                  },
+                  "type": "IncrementVariable",
+                  "inputs": {
+                    "name": "floCostAccumulator",
+                    "value": "@add(body('Get_Prompt_Summary')?['input_token_cost'],body('Get_Prompt_Summary')?['output_token_cost'])"
+                  }
+                }
+              },
+              "runAfter": {
+                "Set_model_token_limit_here": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "greaterOrEquals": [
+                  "@mul(length(join(body('Condense_Conversation'),', ')),4)",
+                  "@outputs('Set_model_token_limit_here')"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c622be9c-a4c0-4628-8eb0-521b14e27899"
+              },
+              "type": "If",
+              "description": "Must not have concurrency enabled so prompts are triggered in order."
+            },
+            "Set_model_token_limit_here": {
+              "runAfter": {
+                "Get_Prompt_Type": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a9d80a42-e1f5-41d3-95b2-44f0950c3bf0"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(outputs('Get_Prompt_Model')?['body/jai_tokenlimit'],4096)"
+            },
+            "Get_Rules": {
+              "actions": {
+                "Get_Mandatory_Rules": {
+                  "actions": {
+                    "List_Mandatory_Rules_for_this_Prompt": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "70edd4bd-1860-47e9-806e-370843a6ee6c"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "ans_rules",
+                          "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\"><entity name=\"ans_rule\"><attribute name=\"ans_ruleid\"/><order attribute=\"ans_ruleref\" descending=\"false\"/><attribute name=\"ans_ruletext\"/><filter type=\"and\"><condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/><condition attribute=\"ans_mandatoryrule\" operator=\"eq\" value=\"1\"/></filter></entity></fetch>"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Select_Mandatory_Rule_Text": {
+                      "runAfter": {
+                        "List_Mandatory_Rules_for_this_Prompt": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "efdc29fa-d36b-4e0c-8fe1-5b4a259c7d1f"
+                      },
+                      "type": "Select",
+                      "inputs": {
+                        "from": "@outputs('List_Mandatory_Rules_for_this_Prompt')?['body/value']",
+                        "select": "@item()?['ans_ruletext']"
+                      }
+                    },
+                    "Join_Mandatory_Rules": {
+                      "runAfter": {
+                        "Select_Mandatory_Rule_Text": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "913cdfb6-dc41-48b4-972f-ecf9d873272f"
+                      },
+                      "type": "Join",
+                      "inputs": {
+                        "from": "@body('Select_Mandatory_Rule_Text')",
+                        "joinWith": " "
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "debf1fed-4d16-44ab-b8e8-a32951c47f9b"
+                  },
+                  "type": "Scope"
+                },
+                "Get_Prompt_Rules": {
+                  "actions": {
+                    "List_Prompt_Specific_Rules_for_this_Prompt": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "4817fa0a-19a5-4a59-978d-08bbb8b16413"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "ans_promptrules",
+                          "fetchXml": "<fetch top=\"50\">\n  <entity name=\"ans_promptrule\">\n    <filter>\n      <condition attribute=\"ans_prompt\" operator=\"eq\" value=\"@{item()?['cprompt.ans_promptid']}\" />\n    </filter>\n    <link-entity name=\"ans_rule\" from=\"ans_ruleid\" to=\"ans_rule\" alias=\"rule\">\n      <attribute name=\"ans_ruletext\" />\n    </link-entity>\n  </entity>\n</fetch>"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Select_Prompt_Rules": {
+                      "runAfter": {
+                        "List_Prompt_Specific_Rules_for_this_Prompt": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "60ec777e-d557-4cae-8cc6-3683c641eaf1"
+                      },
+                      "type": "Select",
+                      "inputs": {
+                        "from": "@outputs('List_Prompt_Specific_Rules_for_this_Prompt')?['body/value']",
+                        "select": "@item()?['rule.ans_ruletext']"
+                      }
+                    },
+                    "Join_Prompt_Rules": {
+                      "runAfter": {
+                        "Select_Prompt_Rules": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "e7adaa24-ae6d-4634-bd65-dfd383e75a7d"
+                      },
+                      "type": "Join",
+                      "inputs": {
+                        "from": "@body('Select_Prompt_Rules')",
+                        "joinWith": " "
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_Mandatory_Rules": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c71633f4-83a5-4f6a-bea7-26ec9cc2d5bc"
+                  },
+                  "type": "Scope"
+                },
+                "Combine_rules": {
+                  "runAfter": {
+                    "Get_Prompt_Rules": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "b8cec7b3-579e-4802-8e48-c1d17e310b0a"
+                  },
+                  "type": "Compose",
+                  "inputs": "@{body('Join_Prompt_Rules')} @{body('Join_Mandatory_Rules')}"
+                },
+                "Summarise_Rules": {
+                  "runAfter": {
+                    "Combine_rules": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "1f06ffcb-33c3-4d07-b2dd-f181082322b2"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "d5af18de-0bb9-ee11-9078-0022480040a1"
+                    },
+                    "body": {
+                      "text": "gpt-3.5-turbo",
+                      "text_1": "Summarise these rules supplied by the user and reduce the amount of tokens consumed. You should include all rules but remove any duplicates and reduce the amount of text used to reduce the amount of tokens used: ",
+                      "text_2": "@outputs('Combine_rules')",
+                      "text_4": "0.1",
+                      "text_3": " ",
+                      "text_6": "0.3"
+                    }
+                  }
+                },
+                "Increment_Cost_2": {
+                  "runAfter": {
+                    "Summarise_Rules": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8c21afd5-c808-47d3-b6d9-a51efe558c6e"
+                  },
+                  "type": "IncrementVariable",
+                  "inputs": {
+                    "name": "floCostAccumulator",
+                    "value": "@add(body('Summarise_Rules')?['input_token_cost'],body('Summarise_Rules')?['output_token_cost'])"
+                  }
+                }
+              },
+              "runAfter": {
+                "Perform_Search": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "937fa56c-3df6-4e8b-807a-d27bee9c400e"
+              },
+              "type": "Scope"
+            },
+            "Get_Prompt_Model": {
+              "runAfter": {
+                "Set_variable": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "6f161159-c020-4589-b65a-c7b3ea572640"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ans_models",
+                  "recordId": "@items('Apply_to_each')?['cprompt.ans_model']",
+                  "$select": "ans_modelname, jai_tokenlimit"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Perform_Search": {
+              "actions": {
+                "Search_Required": {
+                  "actions": {},
+                  "runAfter": {},
+                  "expression": {
+                    "equals": [
+                      "@outputs('Get_Prompt_Type')?['body/ans_requesttype']",
+                      "Bing Search"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "0d51f84d-1f5e-4d2d-a7c5-6ba410b7b1fb"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {
+                "Check_payload_hasnt_exceeded_threshold": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7e9dde4c-d9a7-436f-b3d1-31a330ff3039"
+              },
+              "type": "Scope"
+            },
+            "Get_Prompt_Type": {
+              "runAfter": {
+                "Get_Prompt_Model": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5131f9e3-493e-43c4-a04a-b82ab459ce42"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ans_requesttypes",
+                  "recordId": "@item()?['cprompt.ans_prompttype']",
+                  "$select": "ans_requesttype"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Add_New_Response_Row": {
+              "runAfter": {
+                "Append_Assistant_Context_to_array": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ad36dcfb-1b83-411b-8d0b-ad11140504eb"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ans_responses",
+                  "item/jai_friendlyname": "@items('Apply_to_each')?['cprompt.jai_friendlyname']",
+                  "item/ans_Request@odata.bind": "ans_requests(@{triggerOutputs()?['body/ans_requestid']})",
+                  "item/ans_responsetext": "@body('Make_Prompt_Request')?['response']",
+                  "item/ans_tokencost": "@variables('floCostAccumulator')",
+                  "item/ans_totaltokens": "@body('Make_Prompt_Request')?['prompt_tokens_total']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Make_Prompt_Request": {
+              "runAfter": {
+                "Append_User_Context_to_array": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "025d1897-9377-49fc-bce3-97d68f2a8324"
+              },
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "d5af18de-0bb9-ee11-9078-0022480040a1"
+                },
+                "body": {
+                  "text": "@outputs('Get_Prompt_Model')?['body/ans_modelname']",
+                  "text_1": "Purpose: @{items('Apply_to_each')?['cprompt.ans_purpose']} \n###\nContext: @{items('Apply_to_each')?['cprompt.ans_context']} \n###\nRules: @{body('Summarise_Rules')?['response']}",
+                  "text_2": "@{triggerBody()?['ans_requestname']}\n###\nperform the action as per your system prompt",
+                  "text_4": "@string(coalesce(item()?['cprompt.jai_temperature'],0.7))",
+                  "text_3": "@join(coalesce(body('Print_Summary_as_Array'),body('Condense_Conversation')),',')",
+                  "text_5": "@string(item()?['jai_presencepenalty'])",
+                  "text_6": "@string(item()?['jai_frequencypenalty'])"
+                }
+              }
+            },
+            "Add_System_Context_to_array": {
+              "runAfter": {
+                "Get_Rules": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "3f45884f-1202-459a-8914-494bd887db0f"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "arrOutput",
+                "value": {
+                  "role": "system",
+                  "content": "@{items('Apply_to_each')?['cprompt.ans_context']} @{items('Apply_to_each')?['cprompt.ans_purpose']} Rules: @{body('Summarise_Rules')?['response']}"
+                }
+              }
+            },
+            "Append_User_Context_to_array": {
+              "runAfter": {
+                "Add_System_Context_to_array": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c27ab9cc-f9dd-472d-8a91-bc15b6125143"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "arrOutput",
+                "value": {
+                  "role": "user",
+                  "content": "perform the action as per your system prompt"
+                }
+              }
+            },
+            "Append_Assistant_Context_to_array": {
+              "runAfter": {
+                "Increment_Cost_3": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "86f71fbb-3814-4a12-a785-54c2b4ab24c5"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "arrOutput",
+                "value": {
+                  "role": "assistant",
+                  "content": "@{body('Make_Prompt_Request')?['response']}"
+                }
+              }
+            },
+            "Set_variable": {
+              "runAfter": {
+                "Condense_Conversation": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7b2e47b2-59af-45a2-bea5-133a61b197e6"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "floCostAccumulator",
+                "value": 0
+              }
+            },
+            "Increment_Cost_3": {
+              "runAfter": {
+                "Make_Prompt_Request": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "59cc0df9-23c6-4808-b5c0-9950ec242686"
+              },
+              "type": "IncrementVariable",
+              "inputs": {
+                "name": "floCostAccumulator",
+                "value": "@add(body('Make_Prompt_Request')?['input_token_cost'],body('Make_Prompt_Request')?['output_token_cost'])"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialise_Cost_Variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "117dcdc5-deec-408a-bd79-3cdeaaee8135"
+          },
+          "type": "Foreach"
+        },
+        "List_Child_Prompts": {
+          "runAfter": {
+            "Get_Parent_Prompt": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "75873a08-318f-48b7-a58f-ed6cc0a28c12"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "jai_parentchildprompts",
+              "$orderby": "jai_index",
+              "fetchXml": "<fetch top=\"50\">\n  <entity name=\"jai_parentchildprompt\">\n    <filter>\n      <condition attribute=\"jai_parentprompt\" operator=\"eq\" value=\"@{outputs('Get_Parent_Prompt')?['body/jai_parentpromptid']}\" />\n    </filter>\n    <link-entity name=\"ans_prompt\" from=\"ans_promptid\" to=\"jai_ans_prompt\" link-type=\"inner\" alias=\"cprompt\">\n      <attribute name=\"ans_context\" />\n      <attribute name=\"ans_model\" />\n      <attribute name=\"ans_purpose\" />\n<attribute name=\"jai_friendlyname\" />\n<attribute name=\"jai_frequencypenalty\" />\n<attribute name=\"jai_presencepenalty\" />\n<attribute name=\"jai_temperature\" />\n<attribute name=\"ans_prompttype\" />\n<attribute name=\"ans_promptid\" />\n    </link-entity>\n  </entity>\n</fetch>"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Parent_Prompt": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "87170f46-cda5-4f40-9fa5-18162fd5c7f5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "jai_parentprompts",
+              "recordId": "@triggerOutputs()?['body/_jai_parentprompt_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Set_Request_as_Completed": {
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "36b88174-187f-4f45-ac4a-eefa24a35f25"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "UpdateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ans_requests",
+              "recordId": "@triggerOutputs()?['body/ans_requestid']",
+              "item/ans_requestprocessed": true,
+              "item/ans_sendrequest": false
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "description": "Add err rhandlking here for fd"
+        },
+        "Notify_user": {
+          "runAfter": {
+            "Get_requesting_user": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "243683a6-3cbb-41bf-9871-5da2686a1150"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_powerappsnotificationv2",
+              "operationId": "SendPushNotificationV2",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_powerappsnotificationv2"
+            },
+            "parameters": {
+              "payload/playerType": "PowerApps",
+              "payload/app": "{\n  \"appIdentifier\": \"ans_PromptandResponse\",\n  \"displayName\": \"JustAskIt\",\n  \"type\": \"AppModule\"\n}",
+              "payload/recipients": [
+                "@outputs('Get_requesting_user')?['body/internalemailaddress']"
+              ],
+              "payload/message": "Your request \"@{outputs('Set_Request_as_Completed')?['body/ans_requestname']}\" is completed!",
+              "payload/openApp": true,
+              "payload/dynamicParams/entityLogicalName": "ans_request",
+              "payload/dynamicParams/entityPage": "{\n  \"id\": \"d4fec28d-5ca9-ee11-be37-002248c8eecd\",\n  \"displayName\": \"Form - Request main form\",\n  \"type\": \"entityrecord\"\n}",
+              "payload/dynamicParams/recordId": "@outputs('Set_Request_as_Completed')?['body/ans_requestid']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_requesting_user": {
+          "runAfter": {
+            "Set_Request_as_Completed": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7b0728ea-ba67-4c53-85cc-63ecedcf2649"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "systemusers",
+              "recordId": "@outputs('Set_Request_as_Completed')?['body/_createdby_value']",
+              "$select": "internalemailaddress"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialise_Cost_Variable": {
+          "runAfter": {
+            "Initialize_output_array": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "29150b83-6da0-4df2-bf10-39efcf524cc3"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "floCostAccumulator",
+                "type": "float",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
