@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script src="https://unpkg.com/mermaid@10.6.0/dist/mermaid.min.js"></script>
+    <style>
+        #diagramDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        svg#diagramDiv {
+        max-width: none !important;
+        }
+        
+        </style>
+</head>
+<body>
+    <pre id="graph" class="mermaid"></pre>
+</body>
+    <script>
+        window.addEventListener("message", function(event) {
+            const output = document.getElementById('graph');
+            const graphDefinition = event.data.graphDefinition;
+            const type = mermaid.detectType(graphDefinition);
+            mermaid.initialize({ startOnLoad: false, theme: event.data.theme });
+            mermaid.render(type, event.data.graphDefinition
+            ).then(function (svg) {
+                output.innerHTML = svg.svg;
+            });
+        });
+    </script>
+</html>

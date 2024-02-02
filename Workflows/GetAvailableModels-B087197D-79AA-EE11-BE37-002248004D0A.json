@@ -1,0 +1,178 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_openaigpt4ip": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedopenaigpt4ip_d02bc"
+        },
+        "api": {
+          "name": "shared_openaigpt4ip"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "jai_sharedcommondataserviceforapps_ab4d0"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "5f24d205-76f8-4019-b801-a0de05e00cf8"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "List_models": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "d50e3362-6393-44e4-b26f-6846b96dc23d"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_openaigpt4ip",
+              "operationId": "ModelsGet",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip"
+            },
+            "parameters": {},
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('List_models')?['body/data']",
+          "actions": {
+            "Filter_array": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "4342d398-ead6-4af1-b257-979277a7147e"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@outputs('Get_Current_AI_Models')?['body/value']",
+                "where": "@equals(item()?['ans_modelname'], items('Apply_to_each')?['id'])"
+              }
+            },
+            "Has_this_model_been_logged": {
+              "actions": {
+                "Add_a_new_row": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "1d48276d-6a9f-4538-9249-2b2b7880df6f"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "ans_models",
+                      "item/ans_capability": 0,
+                      "item/ans_inputtokencost": 0,
+                      "item/ans_modelname": "@items('Apply_to_each')?['id']",
+                      "item/ans_outputtokencost": 0
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Filter_array": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@length(body('Filter_array'))",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "0597da05-2c82-4909-bc96-f999376a7602"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Get_Current_AI_Models": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "77fe6909-ff1d-44c2-89cf-30256f7984d3"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 50
+            }
+          }
+        },
+        "Get_Current_AI_Models": {
+          "runAfter": {
+            "List_models": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d1c80068-b7ff-4c86-a8df-3dab220157db"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ans_models",
+              "$select": "ans_modelname",
+              "$top": 100
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

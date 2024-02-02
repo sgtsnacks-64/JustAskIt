@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JAI Response</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #scrollingDiv {
+            height: 700px;
+            overflow-y: scroll;
+            width: 100%; /* specify a width */
+            margin: auto; /* center the element */
+        }
+
+        table {
+            border: 1px solid darkgrey;
+            border-collapse: collapse;
+            margin: auto; /* center the table */
+        }
+
+        table td, table th {
+            border: 1px solid darkgrey;
+        }
+
+        mermaid {
+            background-color: white;
+            border: 1px solid darkgrey;
+            padding: 10px;
+            display: block;
+            margin: auto; /* center the mermaid diagrams */
+        }
+
+        p {
+            font-family: "Segoe UI";
+            font-size: 1rem;
+        }
+
+        chart-content {
+            font-family: "Segoe UI";
+            font-size: 1rem;
+            background-color: rgba(176, 224, 230, 0.25);
+            border-radius: 10px;
+            width: 100%; /* specify a width */
+            margin: auto; /* center the element */
+        }
+
+        content {
+            font-family: "Segoe UI";
+            font-size: 1rem;
+            background-color: rgba(235, 133, 255, 0.281);
+            border-radius: 10px;
+            width: 100%; /* specify a width */
+            margin: auto; /* center the element */
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollingDiv"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.7.0/+esm';
+        
+    
+        function displayField(entities) {
+            var scrollingDiv = document.getElementById("scrollingDiv");
+            var separatorElement = document.createElement("hr");
+            var fieldElement;
+
+            entities.forEach(function(entity) {
+                var field = entity.response;
+                var name = entity.name;
+
+                var nameElement = document.createElement("h2");
+                nameElement.innerHTML = name;   
+
+                var mermaidKeywords = ['<pre class="mermaid">'];
+                var isMermaidSyntax = mermaidKeywords.some(keyword => field.trim().startsWith(keyword));
+                
+                var entityIndex = entities.indexOf(entity);
+                
+                if (isMermaidSyntax) {
+                    scrollingDiv.appendChild(nameElement);
+                    field.split(/(?=<pre class="mermaid">)/).forEach(function (Diagram) {
+                    var diagramContent = document.createElement("chart-content");
+                    diagramContent.innerHTML = Diagram;
+                    scrollingDiv.appendChild(diagramContent);
+                    });
+                    /*
+                    field.split(/(?=<pre class="mermaid">)/).forEach(function (Diagram) {
+                        
+                        
+                        var diagramIndex = field.split(/(?=<pre class="mermaid">)/).indexOf(Diagram);
+                        var DiagramContent = jQuery(Diagram).text();
+                        var type = mermaid.detectType(DiagramContent);
+                        console.log(`detected chart type: ${type}`);
+                        console.log(DiagramContent);
+                        mermaid.render(`${entityIndex}-${diagramIndex}`,type, DiagramContent).then(function (svg) {
+                            var diagramElement = document.createElement("pre");
+                            diagramElement.innerHTML = svg.svg;
+                            document.getElementById("scrollingDiv").appendChild(diagramElement);
+                            document.getElementById("scrollingDiv").appendChild(separatorElement);
+                        }).catch(function (error) {
+                            console.error('Error rendering diagram:', error);
+                        });
+                    });
+
+                    */
+                } else {
+                    scrollingDiv.appendChild(nameElement);
+                    fieldElement = document.createElement("content");
+                    fieldElement.innerHTML = field;
+                    scrollingDiv.appendChild(fieldElement);
+                    
+                }
+                scrollingDiv.appendChild(separatorElement);
+            });
+        }
+
+        window.addEventListener("message", function(event) {
+            mermaid.initialize({loadOnStart: false});
+            displayField(event.data);
+            mermaid.run();
+        });
+    </script>
+
+</body>
+
+</html>
