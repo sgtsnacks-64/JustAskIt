@@ -21405,57 +21405,6 @@
         <LocalizedName languagecode="1033" description="Get Available Models" />
       </LocalizedNames>
     </Workflow>
-    <Workflow WorkflowId="{7d209b10-e6aa-ee11-be37-002248004d0a}" Name="Perform Search">
-      <JsonFileName>/Workflows/PerformSearch-7D209B10-E6AA-EE11-BE37-002248004D0A.json</JsonFileName>
-      <Type>1</Type>
-      <Subprocess>0</Subprocess>
-      <Category>5</Category>
-      <Mode>0</Mode>
-      <Scope>4</Scope>
-      <OnDemand>0</OnDemand>
-      <TriggerOnCreate>0</TriggerOnCreate>
-      <TriggerOnDelete>0</TriggerOnDelete>
-      <AsyncAutodelete>0</AsyncAutodelete>
-      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
-      <StateCode>1</StateCode>
-      <StatusCode>2</StatusCode>
-      <RunAs>1</RunAs>
-      <IsTransacted>1</IsTransacted>
-      <IntroducedVersion>1.0.0.6</IntroducedVersion>
-      <IsCustomizable>1</IsCustomizable>
-      <BusinessProcessType>0</BusinessProcessType>
-      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
-      <PrimaryEntity>none</PrimaryEntity>
-      <LocalizedNames>
-        <LocalizedName languagecode="1033" description="Perform Search" />
-      </LocalizedNames>
-    </Workflow>
-    <Workflow WorkflowId="{61df065d-207b-ee11-8179-002248004ea0}" Name="Prompt and Response">
-      <JsonFileName>/Workflows/PromptandResponse-61DF065D-207B-EE11-8179-002248004EA0.json</JsonFileName>
-      <Type>1</Type>
-      <Subprocess>0</Subprocess>
-      <Category>5</Category>
-      <Mode>0</Mode>
-      <Scope>4</Scope>
-      <OnDemand>0</OnDemand>
-      <TriggerOnCreate>0</TriggerOnCreate>
-      <TriggerOnDelete>0</TriggerOnDelete>
-      <AsyncAutodelete>0</AsyncAutodelete>
-      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
-      <StateCode>0</StateCode>
-      <StatusCode>1</StatusCode>
-      <RunAs>1</RunAs>
-      <IsTransacted>1</IsTransacted>
-      <IntroducedVersion>1.0.0.0</IntroducedVersion>
-      <IsCustomizable>1</IsCustomizable>
-      <BusinessProcessType>0</BusinessProcessType>
-      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
-      <BillingContext>[{"id":"ans_PromptandResponse","type":"UnifiedApp","metadata":{"displayName":"Smart Assistant"}}]</BillingContext>
-      <PrimaryEntity>none</PrimaryEntity>
-      <LocalizedNames>
-        <LocalizedName languagecode="1033" description="Prompt and Response" />
-      </LocalizedNames>
-    </Workflow>
     <Workflow WorkflowId="{7ba33351-75b8-ee11-9078-002248004ea0}" Name="Populate Rule Ref with Rule Text">
       <JsonFileName>/Workflows/PopulateRuleRefwithRuleText-7BA33351-75B8-EE11-9078-002248004EA0.json</JsonFileName>
       <Type>1</Type>
@@ -24171,13 +24120,6 @@
       <IsHidden>0</IsHidden>
       <FileName>/WebResources/crbe6_request_formscript0EFC6CD0-28B9-EE11-9078-002248004EA0</FileName>
     </WebResource>
-    <WebResource unmodified="1">
-      <WebResourceId>{88cc3c20-4b22-ed11-b83e-00224828e89e}</WebResourceId>
-      <Name>cat_home_icon</Name>
-      <DisplayName>Home Icon</DisplayName>
-      <WebResourceType>11</WebResourceType>
-      <IntroducedVersion>1.0.0.1</IntroducedVersion>
-    </WebResource>
     <WebResource>
       <WebResourceId>{fd6584de-3c7b-ee11-8179-002248c8eecd}</WebResourceId>
       <Name>ans_prompt</Name>
@@ -24209,7 +24151,7 @@
             <Titles>
               <Title LCID="1033" Title="Home" />
             </Titles>
-            <SubArea Id="subarea_c76ca196" VectorIcon="/WebResources/cat_home_icon" Icon="/WebResources/cat_home_icon" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" Page="jai_justaskitlandingpage_202d6">
+            <SubArea Id="subarea_c76ca196" VectorIcon="/WebResources/SharePointIcon_Delve.svg" Icon="/WebResources/SharePointIcon_Delve.svg" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" Page="jai_justaskitlandingpage_202d6">
               <Titles>
                 <Title LCID="1033" Title="Home" />
               </Titles>
@@ -24254,7 +24196,7 @@
             <Title LCID="1033" Title="Area1" />
           </Titles>
           <Group Id="group_41a6496a" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
-            <SubArea Id="subarea_b3134b54" DescriptionResourceId="Dashboards_Description" VectorIcon="/WebResources/cat_home_icon" Icon="/WebResources/cat_home_icon" Url="/workplace/home_dashboards.aspx" DefaultDashboard="021127bd-829e-ee11-be37-002248004ea0" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" ToolTipResourseId="DashboardTooltip">
+            <SubArea Id="subarea_b3134b54" DescriptionResourceId="Dashboards_Description" VectorIcon="/WebResources/SharePointIcon_Delve.svg" Icon="/WebResources/SharePointIcon_Delve.svg" Url="/workplace/home_dashboards.aspx" DefaultDashboard="021127bd-829e-ee11-be37-002248004ea0" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" ToolTipResourseId="DashboardTooltip">
               <Titles>
                 <Title LCID="1033" Title="Prompt Administration Dashboard" />
               </Titles>
@@ -24525,13 +24467,6 @@
     <connectionreference connectionreferencelogicalname="ans_sharedopenaigpt4ip_3d2b6">
       <connectionreferencedisplayname>OpenAI GPT (Independent Publisher) JustAskIt-3d2b6</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="jai_sharedbingsearch_d3f39">
-      <connectionreferencedisplayname>Bing Search JustAskIt-d3f39</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_bingsearch</connectorid>
       <iscustomizable>1</iscustomizable>
       <statecode>0</statecode>
       <statuscode>1</statuscode>
