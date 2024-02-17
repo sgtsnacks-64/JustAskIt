@@ -1,11 +1,11 @@
-<ImportExportXml version="9.2.24012.218" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.24014.176" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>JustAskIt</UniqueName>
     <LocalizedNames>
       <LocalizedName description="JustAskIt" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.8</Version>
+    <Version>1.0.0.13</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>JustAskIt</UniqueName>
@@ -93,9 +93,7 @@
       <RootComponent type="9" schemaName="ans_promptfeedbackratingchoice" behavior="0" />
       <RootComponent type="29" id="{0270a1a9-12b9-ee11-9078-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{23412720-5ca9-ee11-be37-0022480040a1}" behavior="0" />
-      <RootComponent type="29" id="{61df065d-207b-ee11-8179-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{7ba33351-75b8-ee11-9078-002248004ea0}" behavior="0" />
-      <RootComponent type="29" id="{7d209b10-e6aa-ee11-be37-002248004d0a}" behavior="0" />
       <RootComponent type="29" id="{84e54119-76b8-ee11-9078-002248004ea0}" behavior="0" />
       <RootComponent type="29" id="{b087197d-79aa-ee11-be37-002248004d0a}" behavior="0" />
       <RootComponent type="29" id="{d5af18de-0bb9-ee11-9078-0022480040a1}" behavior="0" />
@@ -109,7 +107,6 @@
       <RootComponent type="61" schemaName="ans_request" behavior="0" />
       <RootComponent type="61" schemaName="ans_response" behavior="0" />
       <RootComponent type="61" schemaName="ans_rule" behavior="0" />
-      <RootComponent type="61" schemaName="cat_home_icon" behavior="0" />
       <RootComponent type="61" schemaName="crbe6_request_formscript" behavior="0" />
       <RootComponent type="61" schemaName="crbe6_response_form_script" behavior="0" />
       <RootComponent type="61" schemaName="jai_html_request_guide" behavior="0" />
@@ -126,18 +123,6 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="61" schemaName="cat_home_icon" displayName="cat_home_icon" solution="CreatorKitReferencesMDA (1.0.20230421.1)" />
-        <Dependent type="61" schemaName="cat_home_icon" displayName="cat_home_icon" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="61" schemaName="cat_home_icon" displayName="cat_home_icon" solution="CreatorKitReferencesMDA (1.0.20230421.1)" />
-        <Dependent type="62" schemaName="ans_PromptandResponse" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="61" schemaName="cat_home_icon" displayName="cat_home_icon" solution="CreatorKitReferencesMDA (1.0.20230421.1)" />
-        <Dependent type="62" schemaName="jai_PromptAdministration" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="ans_PromptandResponse" displayName="JustAskIt" />
       </MissingDependency>
@@ -150,27 +135,7 @@
         <Dependent type="62" schemaName="jai_PromptAdministration" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="connectionreference" displayName="ans_sharedcommondataserviceforapps_74c65" solution="Active" id.connectionreferencelogicalname="ans_sharedcommondataserviceforapps_74c65" />
-        <Dependent type="29" displayName="Prompt and Response" id="{61df065d-207b-ee11-8179-002248004ea0}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="ans_sharedcommondataserviceforapps_74c65" solution="Active" id.connectionreferencelogicalname="ans_sharedcommondataserviceforapps_74c65" />
-        <Dependent type="29" displayName="Populate Rule Ref with Rule Text" id="{7ba33351-75b8-ee11-9078-002248004ea0}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="ans_sharedcommondataserviceforapps_74c65" solution="Active" id.connectionreferencelogicalname="ans_sharedcommondataserviceforapps_74c65" />
-        <Dependent type="29" displayName="When a new Rule is created update the Rule Text Primary field" id="{84e54119-76b8-ee11-9078-002248004ea0}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedopenaigpt4ip_d02bc" solution="Active" id.connectionreferencelogicalname="new_sharedopenaigpt4ip_d02bc" />
-        <Dependent type="29" displayName="Get Available Models" id="{b087197d-79aa-ee11-be37-002248004d0a}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedopenaigpt4ip_d02bc" solution="Active" id.connectionreferencelogicalname="new_sharedopenaigpt4ip_d02bc" />
-        <Dependent type="29" displayName="Perform Chat Completion" id="{d5af18de-0bb9-ee11-9078-0022480040a1}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="SettingDefinition" displayName="AllowNotificationsEarlyAccess" solution="AppNotifications (10.0.0.15)" id.uniquename="AllowNotificationsEarlyAccess" />
+        <Required type="SettingDefinition" displayName="AllowNotificationsEarlyAccess" solution="AppNotifications (10.0.0.16)" id.uniquename="AllowNotificationsEarlyAccess" />
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=ans_PromptandResponse,settingdefinitionid.uniquename=AllowNotificationsEarlyAccess" id.parentappmoduleid.uniquename="ans_PromptandResponse" id.settingdefinitionid.uniquename="AllowNotificationsEarlyAccess" />
       </MissingDependency>
     </MissingDependencies>

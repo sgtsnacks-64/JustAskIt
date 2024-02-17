@@ -1,10 +1,10 @@
 {
   "properties": {
     "connectionReferences": {
-      "shared_openaigpt4ip": {
+      "shared_openaigpt4ip_1": {
         "runtimeSource": "invoker",
         "connection": {
-          "connectionReferenceLogicalName": "new_sharedopenaigpt4ip_d02bc"
+          "connectionReferenceLogicalName": "ans_sharedopenaigpt4ip_3d2b6"
         },
         "api": {
           "name": "shared_openaigpt4ip"
@@ -58,7 +58,7 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "connectionName": "shared_openaigpt4ip",
+              "connectionName": "shared_openaigpt4ip_1",
               "operationId": "ModelsGet",
               "apiId": "/providers/Microsoft.PowerApps/apis/shared_openaigpt4ip"
             },
@@ -172,7 +172,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }
